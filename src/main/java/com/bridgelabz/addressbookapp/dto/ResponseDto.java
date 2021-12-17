@@ -12,7 +12,6 @@ public class ResponseDto {
         this.data = data;
     }
 
-    public ResponseDto() {
 
-    }
+
 }

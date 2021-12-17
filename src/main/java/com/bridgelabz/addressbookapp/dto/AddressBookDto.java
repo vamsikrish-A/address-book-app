@@ -8,14 +8,14 @@ import javax.validation.constraints.Size;
 
 @Data
 public class AddressBookDto {
+    @NotNull(message = "CityName should not be empty")
+    private String city;
     @NotNull(message = "First name Should not be empty")
     @Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "First name is invalid!!!")
     private String firstName;
     @NotNull(message = "Lastname should not be empty")
     @Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "LastName is invalid!")
     private String lastName;
-    @NotNull(message = "CityName should not be empty")
-    private String city;
     @NotNull(message = "State name should not be empty")
     private String state;
     @NotNull(message = "phone  number should not be empty")
