@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class AddressBookService {
-    private static final String ADDRESSBOOK_ADDED_SUCCESSFULLY = "DETAILS UPDATED SUCCESSFULLY";
+    private static final String ADDRESSBOOK_ADDED_SUCCESSFULLY = "DETAILS ADDED SUCCESSFULLY";
     private static final String ADDRESSBOOK_UPDATED_SUCCESSFULLY = "DETAILS UPDATED SUCCESSFULLY";
 
     @Autowired
