@@ -1,5 +1,10 @@
 package com.bridgelabz.addressbookapp.exception;
-
+/**
+ * @purpose: @ControllerAdvice annotation which allows to handle exceptions across te whole application in one
+ *              Global Handling Component
+ * @author: VamsiKrishna
+ * @since: 15-12-2021
+ */
 import com.bridgelabz.addressbookapp.dto.ResponseDto;
 import com.bridgelabz.addressbookapp.dto.ResponseDto;
 import org.springframework.http.HttpStatus;

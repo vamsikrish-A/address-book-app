@@ -1,4 +1,9 @@
 package com.bridgelabz.addressbookapp.exception;
+/**
+ * @Purpose: validation Exception handles the ResponseEntityExceptions like Http method body, header and status codes.
+ * @author: VamsiKrishna
+ * @since: 15-12-2021.
+ */
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +26,8 @@ public class ValidationException extends ResponseEntityExceptionHandler {
     @Valid
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                          HttpHeaders headers, HttpStatus status, WebRequest request) {
+                                                                  HttpHeaders headers, HttpStatus status,
+                                                                  WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timeStamp", new Date());
         body.put("status", status.value());

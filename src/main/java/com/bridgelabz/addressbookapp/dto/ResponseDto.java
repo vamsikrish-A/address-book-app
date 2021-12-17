@@ -1,4 +1,9 @@
 package com.bridgelabz.addressbookapp.dto;
+/**
+ * @purpose: response for http methods shows message and object data such as Http status code.
+ * @author: VamsiKrishna
+ * @Since: 15/12/2021
+ */
 
 import lombok.Data;
 
@@ -11,7 +16,6 @@ public class ResponseDto {
         this.message = message;
         this.data = data;
     }
-
 
 
 }

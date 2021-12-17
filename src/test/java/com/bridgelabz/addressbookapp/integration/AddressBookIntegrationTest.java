@@ -34,21 +34,23 @@ public class AddressBookIntegrationTest {
 
     @Test
     void addAddressbookDetailsTest() throws Exception {
-        when(addressBookService.addAddressBookDetails(any())).thenReturn( new ResponseDto("DETAILS ADDED SUCCESSFULLY", HttpStatus.CREATED));
+        when(addressBookService.addAddressBookDetails(any())).thenReturn(new ResponseDto("DETAILS ADDED SUCCESSFULLY", HttpStatus.CREATED));
         mockMvc.perform(MockMvcRequestBuilders.post("/addressbook/details")
-                .content("\"{\\\"firstName\\\": \\\"Vamsi\\\", +" +
-                "\\\"lastName\\\": \\\"Krishna\\\", \\\"city\\\": \\\"SriKalahasti\\\", +" +
-                "\\\"state\\\": \\\"AndhraPradesh\\\", \\\"phoneNumber\\\": \\\"9876543210\\\", +" +
-                "\\\"zipCode\\\": \\\"654321\\\"}\"")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .content("\"{\\\"firstName\\\": \\\"Vamsi\\\", +" +
+                                "\\\"lastName\\\": \\\"Krishna\\\", \\\"city\\\": \\\"SriKalahasti\\\", +" +
+                                "\\\"state\\\": \\\"AndhraPradesh\\\", \\\"phoneNumber\\\": \\\"9876543210\\\", +" +
+                                "\\\"zipCode\\\": \\\"654321\\\"}\"")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest());
     }
+
     @Test
     void getAddressBookDetailsTest() throws Exception {
         when(addressBookService.getAddressBookDetails()).thenReturn(new ArrayList<>());
         mockMvc.perform(MockMvcRequestBuilders.get("/addressbook/details"))
                 .andExpect(status().isOk());
     }
+
     @Test
     void getAddressBookDetailsByIdTest() throws Exception {
         AddressBookEntity addressBookEntity = new AddressBookEntity();
@@ -56,6 +58,7 @@ public class AddressBookIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/addressbook/details/1"))
                 .andExpect(status().is5xxServerError());
     }
+
     @Test
     void updateAddressBookDetailsByIdTest() throws Exception {
         AddressBookDto addressBookDto = new AddressBookDto();
@@ -69,15 +72,16 @@ public class AddressBookIntegrationTest {
 
         when(addressBookService.updateAddressBookDetails(id, addressBookDto))
                 .thenReturn(new ResponseDto("DETAILS UPDATED SUCCESSFULLY", HttpStatus.ACCEPTED));
-        mockMvc.perform(MockMvcRequestBuilders.put("/addressbook/details/{Id}",id)
-                .content("{\"id\": 1, \"city\": \"SriKalahasti\",\"firstName\": \"Vamsi\", \"lastName\": \"Krishna\", \"state\": \"AndhraPradesh\", \"phoneNumber\": \"9876543210\", \"zipCode\": \"654321\"}")
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.put("/addressbook/details/{Id}", id)
+                        .content("{\"id\": 1, \"city\": \"SriKalahasti\",\"firstName\": \"Vamsi\", \"lastName\": \"Krishna\", \"state\": \"AndhraPradesh\", \"phoneNumber\": \"9876543210\", \"zipCode\": \"654321\"}")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError());
 
     }
+
     @Test
     void deleteAddressBookDetailsTest() throws Exception {
-        when(addressBookService.deleteAddressBookDetails(1)).thenReturn(new ResponseDto("AddressBook details with ID:\" +id+\" Deleted Successfully", HttpStatus.ACCEPTED) );
+        when(addressBookService.deleteAddressBookDetails(1)).thenReturn(new ResponseDto("AddressBook details with ID:\" +id+\" Deleted Successfully", HttpStatus.ACCEPTED));
         mockMvc.perform(MockMvcRequestBuilders.delete("/addressbook/details/{Id}", 1))
                 .andExpect(status().is5xxServerError());
     }

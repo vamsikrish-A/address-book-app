@@ -63,7 +63,7 @@ public class AddressBookServiceTest {
     void givenAddressBook_WhenGetAddressBookDetailsById_ShouldThrowException() {
         int id = 1;
         when(addressBookRepo.findById(id)).thenReturn(Optional.empty());
-        Assertions.assertThrows(NullPointerException.class, ()-> addressBookService.getAddressBookDetailsById(id));
+        Assertions.assertThrows(NullPointerException.class, () -> addressBookService.getAddressBookDetailsById(id));
     }
 
     @Test
@@ -84,6 +84,7 @@ public class AddressBookServiceTest {
         Assertions.assertEquals(expectedResponse, actualResponse);
         verify(addressBookRepo, times(1)).save(addressBookEntity);
     }
+
     @Test
     void givenAddressBook_WhenUpdateAddressBookDetailsById_ShouldReturnResponseMessage() {
         int id = 1;
@@ -105,13 +106,14 @@ public class AddressBookServiceTest {
         addressBookEntity.setCity(addressBookEntity.getCity());
         addressBookEntity.setPhoneNumber(addressBookEntity.getPhoneNumber());
         addressBookEntity.setZipCode(addressBookEntity.getZipCode());
-        when(addressBookBuilder.buildAddressBookEntity(addressBookDto,addressBookEntity))
+        when(addressBookBuilder.buildAddressBookEntity(addressBookDto, addressBookEntity))
                 .thenReturn(addressBookEntity);
         ResponseDto actualResponse = addressBookService.updateAddressBookDetails(id, addressBookDto);
         ResponseDto expectedResponse = new ResponseDto("DETAILS UPDATED SUCCESSFULLY", HttpStatus.ACCEPTED);
         verify(addressBookRepo, times(1)).save(addressBookEntity);
         Assertions.assertEquals(expectedResponse, actualResponse);
     }
+
     @Test
     void givenAddressBook_WhenUpdateAddressBookDetailsById_ShouldReturnException() {
         int id = 1;
@@ -124,8 +126,10 @@ public class AddressBookServiceTest {
         addressBookDto.setZipCode("654321");
 
         when(addressBookRepo.findById(id)).thenReturn(Optional.empty());
-        Assertions.assertThrows(NullPointerException.class, ()-> addressBookService.updateAddressBookDetails(id,addressBookDto));
+        Assertions.assertThrows(NullPointerException.class, () -> addressBookService
+                .updateAddressBookDetails(id, addressBookDto));
     }
+
     @Test
     void givenAddressBook_WhenAddressBookDeletedById_ShouldReturnResponse() {
         AddressBookEntity addressBookEntity = new AddressBookEntity();
@@ -139,10 +143,13 @@ public class AddressBookServiceTest {
 
         when(addressBookRepo.findById(addressBookEntity.getId())).thenReturn(Optional.of(addressBookEntity));
         ResponseDto actualResponse = addressBookService.deleteAddressBookDetails(addressBookEntity.getId());
-        ResponseDto expectedResponse = new ResponseDto("AddressBook details with ID:" +addressBookEntity.getId()+" Deleted Successfully", HttpStatus.ACCEPTED);
+        ResponseDto expectedResponse = new ResponseDto
+                ("AddressBook details with ID:" + addressBookEntity.getId() + " Deleted Successfully",
+                        HttpStatus.ACCEPTED);
     }
+
     @Test
-    void givenAddressBook_WhenAddressBookDeletedById_ShouldThrowException () {
+    void givenAddressBook_WhenAddressBookDeletedById_ShouldThrowException() {
         AddressBookEntity addressBookEntity = new AddressBookEntity();
         addressBookEntity.setId(1);
         addressBookEntity.setCity("Srikalahasti");
@@ -152,7 +159,8 @@ public class AddressBookServiceTest {
         addressBookEntity.setPhoneNumber("9876543210");
         addressBookEntity.setZipCode("654321");
         when(addressBookRepo.findById(addressBookEntity.getId())).thenReturn(Optional.empty());
-        Assertions.assertThrows(NullPointerException.class,()-> addressBookService.deleteAddressBookDetails(addressBookEntity.getId()));
+        Assertions.assertThrows(NullPointerException.class, () -> addressBookService
+                .deleteAddressBookDetails(addressBookEntity.getId()));
 
     }
 }

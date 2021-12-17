@@ -29,7 +29,8 @@ public class AddressBookControllerTest {
     @Test
     void givenAddressBook_WhenAddedAddDetails_ShouldReturnSuccessResponseMessage() {
         ResponseEntity<ResponseDto> successResponse = new ResponseEntity<>
-                ((new ResponseDto("AddressBook details added Successfully", HttpStatus.CREATED)), HttpStatus.CREATED);
+                ((new ResponseDto("AddressBook details added Successfully", HttpStatus.CREATED)),
+                        HttpStatus.CREATED);
         AddressBookDto addressBookDto = new AddressBookDto();
         addressBookDto.setFirstName("Vamsi");
         addressBookDto.setLastName("Krishna");
@@ -43,14 +44,16 @@ public class AddressBookControllerTest {
         ResponseEntity<ResponseDto> actualResponse = addressBookController.addAddressBookDetails(addressBookDto);
         Assertions.assertEquals(successResponse, actualResponse);
     }
+
     @Test
     void givenAddressBook_WhenWantsToGetAddressBookDetails_ShouldReturnAddressBookList() {
         when(addressBookService.getAddressBookDetails()).thenReturn(Lists.newArrayList(new AddressBookEntity()));
         ResponseEntity<List<AddressBookEntity>> actualResponse = addressBookController.getAddressBookList();
         Assertions.assertNotNull(actualResponse);
         Assertions.assertEquals(HttpStatus.OK, actualResponse.getStatusCode());
-        Assertions.assertEquals(1,actualResponse.getBody().size());
+        Assertions.assertEquals(1, actualResponse.getBody().size());
     }
+
     @Test
     void givenAddressBook_WhenWantsToGetAddressBookDetailsById_ShouldBeReturnTheAddressBook() {
         int id = 1;
@@ -59,11 +62,12 @@ public class AddressBookControllerTest {
         ResponseEntity<AddressBookEntity> actualResponse = addressBookController.getAddressBookById(id);
         Assertions.assertEquals(HttpStatus.OK, actualResponse.getStatusCode());
     }
+
     @Test
     void givenAddressBook_WhenAddressBookDetailsWereUpdatedById_ShouldReturnResponse() {
         ResponseEntity<ResponseDto> successResponse = new ResponseEntity<>
                 ((new ResponseDto("AddressBook details updated Successfully",
-                        HttpStatus.ACCEPTED)),HttpStatus.ACCEPTED);
+                        HttpStatus.ACCEPTED)), HttpStatus.ACCEPTED);
         int id = 1;
         AddressBookDto addressBookDto = new AddressBookDto();
         addressBookDto.setFirstName("Vamsi");
@@ -73,18 +77,22 @@ public class AddressBookControllerTest {
         addressBookDto.setPhoneNumber("9876543210");
         addressBookDto.setZipCode("654321");
         when(addressBookService.updateAddressBookDetails(id, addressBookDto))
-                .thenReturn(new ResponseDto("AddressBook details updated Successfully", HttpStatus.ACCEPTED));
-        ResponseEntity<ResponseDto> actualResponse = addressBookController.updateAddressbookDetails(id, addressBookDto);
+                .thenReturn(new ResponseDto("AddressBook details updated Successfully",
+                        HttpStatus.ACCEPTED));
+        ResponseEntity<ResponseDto> actualResponse = addressBookController
+                .updateAddressbookDetails(id, addressBookDto);
         Assertions.assertEquals(successResponse, actualResponse);
     }
+
     @Test
     void givenAddressBook_WhenAddressBookDetailsDeletedById_ShouldReturnResponse() {
         ResponseEntity<ResponseDto> successResponse = new ResponseEntity<>
                 ((new ResponseDto("AddressBook data deleted by id successfully",
-                        HttpStatus.ACCEPTED)),HttpStatus.ACCEPTED);
+                        HttpStatus.ACCEPTED)), HttpStatus.ACCEPTED);
         int id = 1;
         when(addressBookService.deleteAddressBookDetails(id))
-                .thenReturn(new ResponseDto("AddressBook data deleted by id successfully", HttpStatus.ACCEPTED));
+                .thenReturn(new ResponseDto("AddressBook data deleted by id successfully",
+                        HttpStatus.ACCEPTED));
         ResponseEntity<ResponseDto> actualResponse = addressBookController.deleteAddressbookDetailsById(id);
         Assertions.assertEquals(successResponse, actualResponse);
 

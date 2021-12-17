@@ -1,4 +1,9 @@
 package com.bridgelabz.addressbookapp.entity;
+/**
+ * @purpose: entity is lightweight persistence object, represents a table in DB, corresponds to row in table.
+ * @author: VamsiKrishna
+ * @since: 15/12/2021
+ */
 
 import lombok.Data;
 
